@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             x:Class="HW5_MapApp.SatelliteMapPage"
+             BackgroundColor="LightBlue">
+
+    <StackLayout VerticalOptions="StartAndExpand"
+                 Padding="30">
+        
+        <StackLayout Orientation="Horizontal" 
+                     HorizontalOptions="CenterAndExpand">
+            <!-- Place Buttons here to change MapType or reset the map -->
+            <Button x:Name="ChangeMapButton"
+                    Text="Change Type"
+                    FontAttributes="Bold"
+                    BackgroundColor="LightBlue"
+                    Clicked="ChangeMapButton_Clicked"/>
+            
+            <Button x:Name="ResetMapButton"
+                    Text="Reset Map"
+                    FontAttributes="Bold"
+                    BackgroundColor="LightBlue"
+                    Clicked="ResetMapButton_Clicked"/>
+        </StackLayout>        
+        
+        <!-- Initialize the Map and Pins here -->
+        <maps:Map x:Name="MyMap" 
+                  ItemsSource="{Binding PinnedLocationList}"
+                  WidthRequest="320"
+                  HeightRequest="420"
+                  IsShowingUser="True"
+                  MapType="Satellite">
+            <maps:Map.ItemTemplate>
+                <DataTemplate>
+                    <maps:Pin Type="Place"
+                              Position="{Binding Position}"
+                              Address="{Binding Address}"
+                              Label="{Binding Description}"
+                              Clicked="Pin_Clicked" />
+                </DataTemplate>                
+            </maps:Map.ItemTemplate>   
+        </maps:Map>        
+       
+        <!-- Initialize Picker here -->
+        <Picker x:Name="picker" 
+                Title="Select a Pin"     
+                TitleColor="Red"
+                SelectedIndexChanged="Picker_SelectedIndexChanged" />
+
+    </StackLayout>
+</ContentPage>
