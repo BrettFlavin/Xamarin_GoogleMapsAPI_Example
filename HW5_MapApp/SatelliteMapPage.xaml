@@ -6,31 +6,38 @@
              BackgroundColor="LightBlue">
 
     <StackLayout VerticalOptions="StartAndExpand"
-                 Padding="30">
-        
-        <StackLayout Orientation="Horizontal" 
-                     HorizontalOptions="CenterAndExpand">
-            <!-- Place Buttons here to change MapType or reset the map -->
+                 Padding="10">
+
+        <!-- The Change map Button and Label -->
+        <StackLayout Orientation="Horizontal" >            
             <Button x:Name="ChangeMapButton"
-                    Text="Change Type"
+                    Text="Change Map"
                     FontAttributes="Bold"
                     BackgroundColor="LightBlue"
-                    Clicked="ChangeMapButton_Clicked"/>
-            
+                    Clicked="ChangeMapButton_Clicked" />            
+            <Label x:Name ="MapLabel" 
+                   VerticalOptions="Center" />
+        </StackLayout>
+
+        <!-- The Reset Map Button and Label -->
+        <StackLayout Orientation="Horizontal">
             <Button x:Name="ResetMapButton"
                     Text="Reset Map"
                     FontAttributes="Bold"
                     BackgroundColor="LightBlue"
-                    Clicked="ResetMapButton_Clicked"/>
-        </StackLayout>        
-        
+                    Clicked="ResetMapButton_Clicked" />
+            <Label x:Name ="LocationLabel" 
+                   VerticalOptions="Center" />
+        </StackLayout>
+
         <!-- Initialize the Map and Pins here -->
         <maps:Map x:Name="MyMap" 
                   ItemsSource="{Binding PinnedLocationList}"
                   WidthRequest="320"
-                  HeightRequest="420"
-                  IsShowingUser="True"
-                  MapType="Satellite">
+                  HeightRequest="400"
+                  IsShowingUser="False"
+                  MapType="Satellite"
+                  MapClicked="MyMap_MapClicked">
             <maps:Map.ItemTemplate>
                 <DataTemplate>
                     <maps:Pin Type="Place"
