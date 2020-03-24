@@ -6,34 +6,45 @@
              BackgroundColor="LightBlue"
              Title="Maps">
 
+    <!-- a Style that sets multiple properties of the 2 Buttons-->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ButtonStyle" TargetType="Button">                
+                <Setter Property="BackgroundColor" Value="LightSteelBlue" />
+                <Setter Property="TextColor" Value="Red" />
+                <Setter Property="BorderColor" Value="Black" />               
+                <Setter Property="BorderWidth" Value="3" />
+                <Setter Property="CornerRadius" Value="20" />
+            </Style>            
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <StackLayout VerticalOptions="StartAndExpand"
                  Padding="10">
 
-        <!-- Create a 'Change Map' Button that changes the type of map displayed... --> 
-        <StackLayout Orientation="Horizontal" >            
+        <StackLayout Orientation="Horizontal" >
+            <!-- a 'Change Map' Button that changes the type of map displayed when clicked -->
             <Button x:Name="ChangeMapButton"
                     Text="Change Map"
-                    FontAttributes="Bold"
-                    BackgroundColor="LightBlue"
+                    Style="{StaticResource ButtonStyle}"
                     Clicked="ChangeMapButton_Clicked" />
-            <!-- and a Label to show the current map type -->
+            <!-- a Label to display the current map type -->
             <Label x:Name ="MapLabel" 
                    VerticalOptions="Center" />
         </StackLayout>
-
-        <!-- Create a 'Reset Map' Button that resets the map to its default position... --> 
+      
         <StackLayout Orientation="Horizontal">
+            <!-- a 'Reset Map' Button that resets the map back to its default position when clicked -->
             <Button x:Name="ResetMapButton"
                     Text="Reset Map"
-                    FontAttributes="Bold"
-                    BackgroundColor="LightBlue"
+                    Style="{StaticResource ButtonStyle}"
                     Clicked="ResetMapButton_Clicked" />
-            <!-- and a Label to show the current position -->
+            <!-- a Label to show the current location coordinates -->
             <Label x:Name ="LocationLabel" 
                    VerticalOptions="Center" />
         </StackLayout>
 
-        <!-- Create the Map and Pins here -->
+        <!-- a Map and it's Pins -->
         <maps:Map x:Name="MyMap" 
                   ItemsSource="{Binding PinnedLocationList}"
                   WidthRequest="320"
@@ -52,11 +63,10 @@
             </maps:Map.ItemTemplate>   
         </maps:Map>        
        
-        <!-- Create the Picker here -->
+        <!-- a Picker to choose a Map Pin -->
         <Picker x:Name="picker" 
                 Title="Select a Pin"     
                 TitleColor="Red"
-                SelectedIndexChanged="Picker_SelectedIndexChanged" />
-
+                SelectedIndexChanged="Picker_SelectedIndexChanged"/>
     </StackLayout>
 </ContentPage>

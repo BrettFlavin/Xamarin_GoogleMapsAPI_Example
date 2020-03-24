@@ -1,29 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
 namespace HW5_MapApp
 {
-   
+
     public partial class SatelliteMapPage : ContentPage
     {
         // a collection of Location objects that holds all the pinned Locations
         public ObservableCollection<Location> PinnedLocationList { get; private set; } = new ObservableCollection<Location>
          {
-            new Location {Position = new Position(33.197563, -117.245807), Address = "Frazier Farms", Description = "Organic and Farm-Fresh food market"},
-            new Location {Position = new Position(32.830351, -117.280056), Address = "Girlfriend's House", Description = "Windansea Beach, La Jolla"},
-            new Location {Position = new Position(33.492097, -112.104575), Address = "Born Here", Description = "My first house in Phoenix, AZ"},
-            new Location {Position = new Position(39.950084, -75.144705), Address = "Sonny's Cheesesteaks", Description = "One of the best steaks in Philly"},
-            new Location {Position = new Position(26.481516, 127.922148), Address = "Okinawa, Japan", Description = "Spent a year living here on this beautiful island"},
+            new Location {Position = new Position(33.197563, -117.245807), Address = "Vista, CA", Description = "Frazier Farms - Organic food market"},
+            new Location {Position = new Position(32.830351, -117.280056), Address = "San Diego, CA", Description = "GFs house - Windansea Beach, La Jolla"},
+            new Location {Position = new Position(33.492097, -112.104575), Address = "Phoenix, AZ", Description = "First house - Born here in Phoenix, AZ"},
+            new Location {Position = new Position(39.950084, -75.144705), Address = "Philadelphia, PA", Description = "Sonny's steaks - Best cheesesteak in Philly"},
+            new Location {Position = new Position(26.459279, 127.918681), Address = "Okinawa, Japan", Description = " Island of Okinawa - Lived here for 1 year"},
         };
         // a default start position for the map
-        public Position StartPos = new Position(38.995264, -94.279136);
+        public Position StartPos = new Position(38.995264, -97.279136);
 
         public SatelliteMapPage()
         {
@@ -59,7 +56,7 @@ namespace HW5_MapApp
             if (selectedIndex != -1)
             {
                 // center the map on the selected pin's location and update the location label 
-                MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(MyMap.Pins[selectedIndex].Position, Distance.FromMiles(10)));
+                MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(MyMap.Pins[selectedIndex].Position, Distance.FromMiles(5)));
                 LocationLabel.Text = $"Latitude: {MyMap.Pins[selectedIndex].Position.Latitude}\nLongitude: {MyMap.Pins[selectedIndex].Position.Longitude}";
             }
         }
@@ -68,7 +65,7 @@ namespace HW5_MapApp
         private void Pin_Clicked(object sender, EventArgs e)
         {
             // moves the Map to the Pin location and updates the location label
-            MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(((Pin)sender).Position, Distance.FromMiles(10)));
+            MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(((Pin)sender).Position, Distance.FromMiles(.5)));
             LocationLabel.Text = $"Latitude: {((Pin)sender).Position.Latitude}\nLongitude: {((Pin)sender).Position.Longitude}";
         }
         
@@ -96,8 +93,6 @@ namespace HW5_MapApp
         }
 
         // event fired when the 'Reset Map' button is clicked
-        // *** TO DO ***
-        // Make sure all pins info windows are hidden here
         private void ResetMapButton_Clicked(object sender, EventArgs e)
         {
             // reset the picker and map to default positions
@@ -111,5 +106,6 @@ namespace HW5_MapApp
             // updates the label to show coordinates of position clicked on
             LocationLabel.Text = $"Latitude: {e.Position.Latitude}\nLongitude: {e.Position.Longitude}";
         }
+
     }
 }
